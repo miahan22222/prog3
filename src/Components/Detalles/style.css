@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content */
+    padding: 20px; /* Add some padding */
+}
+
+.loading {
+    font-size: 1.5em; /* Increase font size for loading text */
+    color: #666; /* Light gray color for loading text */
+    margin-top: 20px; /* Space above the loading text */
+}
+
+.detalle-pelicula {
+    max-width: 300px; /* Limit max width for movie details */
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 20px; /* Padding inside the detail box */
+    margin-top: 20px; /* Space above the detail box */
+}
+
+.detalle-pelicula h1 {
+    font-size: 2em; /* Larger title */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+.detalle-pelicula img {
+    width: 100%; /* Make the image responsive */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 20px; /* Space below the image */
+}
+
+.detalle-pelicula p {
+    line-height: 1.6; /* Improve line spacing for readability */
+    color: #333; /* Dark text for better contrast */
+}
+
