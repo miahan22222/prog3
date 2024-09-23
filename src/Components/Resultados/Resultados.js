@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Pelicula from "../Pelicula/Pelicula";
+import Gif from "../Gif/Gif";
 
 class Resultados extends Component {
     constructor(props) {
@@ -33,7 +34,7 @@ class Resultados extends Component {
                         <h2>No hay resultados para: "{this.props.location.state.query}"</h2>
                     ) : (
                         this.state.cargando ? (
-                            <h3>Cargando...</h3>
+                            <Gif/>
                         ) : (
                             this.state.peliculas.map((elm) => (
                                 <Pelicula elm={elm} url={this.props.url} />

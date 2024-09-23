@@ -4,7 +4,7 @@ import ComponenteControlado from '../ComponenteControlado/ComponenteControlado'
 import Pelicula from '../Pelicula/Pelicula'
 import "./style.css";
 // import Search from '../Search/Search';
-
+import Gif from '../Gif/Gif';
 
 
 class Movies extends Component {
@@ -12,18 +12,32 @@ class Movies extends Component {
         super(props)
         this.state = {
             peliculas:[],
-            pelisMostradas: this.props.limit
+            peliculasBackup: [],
+            pelisMostradas: props.limit,
+            paginaACargar: 2
         }
         
 
+    }
+    filtrarPeliculas(nombrePelicula){
+        const peliculasFiltradas = this.state.peliculasBackup.filter(
+            (elm) => elm.title.toLowerCase().includes(nombrePelicula.toLowerCase()) 
+        )
+
+        this.setState({
+            peliculas: peliculasFiltradas
+        })
+        
     }
 
     componentDidMount(){
         fetch(this.props.endpoint)
         .then((resp) => resp.json())
         .then((data) => {
+            console.log('data', data)
             setTimeout(() => this.setState({ 
-                peliculas: data.results
+                peliculas: data.results, 
+                peliculasBackup: data.results
             }), 3000) 
             
 
@@ -33,22 +47,17 @@ class Movies extends Component {
     }
 
     cargarMas() {
-        this.setState((prevState) => ({
-            pelisMostradas: prevState.pelisMostradas + 5 
-        }));
+        fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=9458a99baf5a9ba3fe341cd43217ef95&page=${this.state.paginaACargar}`)
+        .then((resp) => resp.json())
+        .then((data) => 
+            this.setState({peliculas: this.state.peliculas.concat(data.results), peliculasBackup: this.state.concat(data.results),paginaACargar: this.state.paginaACargar + 1 })) 
+        .catch((err) => console.log(err))
+      
+       ;
     }
 
 
-    filtrarPeliculas(nombrePelicula){
-        const peliculasFiltradas = this.state.peliculas.filter(
-            (elm) => elm.title.toLowerCase().includes(nombrePelicula.toLowerCase()) 
-        )
 
-        this.setState({
-            peliculas: peliculasFiltradas
-        })
-        
-    }
     
 
     render(){
@@ -66,7 +75,7 @@ class Movies extends Component {
                 <section className='card-container'>
                 {this.state.peliculas.length === 0 ?
                 (
-                    <h3>Cargando...</h3>
+                    <Gif/>
                 )
                 :
                 (

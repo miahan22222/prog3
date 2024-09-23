@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import DetallePeliculas from "../DetallePeliculas/DetallePeliculas";
 import "./style.css";
-
-
+import Gif from "../Gif/Gif";
 
 class Detalles extends Component {
   constructor(props){
@@ -30,7 +29,7 @@ class Detalles extends Component {
     return(
         <div className="container">
             {this.state.peli === null ?(
-                <h3 className="loading">Cargando...</h3>
+                <Gif/>
             ):(
               <div className="detalle-pelicula">
                 <DetallePeliculas peli={this.state.peli}/>
