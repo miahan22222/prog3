@@ -4,7 +4,7 @@ import ComponenteControlado from '../ComponenteControlado/ComponenteControlado'
 import Pelicula from '../Pelicula/Pelicula'
 import "./style.css";
 // import Search from '../Search/Search';
-
+import Gif from '../Gif/Gif';
 
 
 class Movies extends Component {
@@ -66,7 +66,7 @@ class Movies extends Component {
                 <section className='card-container'>
                 {this.state.peliculas.length === 0 ?
                 (
-                    <h3>Cargando...</h3>
+                    <Gif/>
                 )
                 :
                 (
