@@ -11,7 +11,6 @@ class DetallePeliculas extends Component {
 
 
   render() {
-    // const id = this.props.data.id
     let genres = this.props.peli.genres
     return (<div >
       <h1>{this.props.peli.title} </h1>

@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 import Pelicula from "../Pelicula/Pelicula";
+import "./style.css";
 import Gif from "../Gif/Gif";
 
 class Resultados extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            peliculas: [],
-            cargando: true,
+            resultados: []
         };
     }
 
     componentDidMount() {
-        this.setState({ cargando: true });
-
-        fetch(`https://api.themoviedb.org/3/search/movie?query=${this.props.location.state.query}&api_key=9458a99baf5a9ba3fe341cd43217ef95`)
+        console.log('props results', this.props)
+        const loquebusca = this.props.history.location.state.query
+        fetch(`https://api.themoviedb.org/3/search/movie?api_key=9458a99baf5a9ba3fe341cd43217ef95&query=${loquebusca}`)
         .then((resp) => resp.json())
             .then((data) => {
+                console.log("data", data)
                 setTimeout(() => this.setState({ 
-                    peliculas: data.results, 
-                    cargando: false 
+                    resultados: data.results
                 }), 3000);
             })
             .catch((err) => console.log(err));
@@ -28,18 +28,19 @@ class Resultados extends Component {
     render() {
         return (
             <div>
-                <h1>Resultados de búsqueda:</h1>
-                <section>
-                    {this.state.peliculas.length === 0 ? (
-                        <h2>No hay resultados para: "{this.props.location.state.query}"</h2>
-                    ) : (
-                        this.state.cargando ? (
-                            <Gif/>
-                        ) : (
-                            this.state.peliculas.map((elm) => (
+                <h1>Resultados de búsqueda de:"{this.props.history.location.state.query}"</h1>
+                <section className='card-container'>
+                    {this.state.resultados.length > 0 ?  
+                    
+                    this.state.resultados.map((elm) => (
                                 <Pelicula elm={elm} url={this.props.url} />
                             ))
-                        )
+                    :
+                    (
+                        <div>
+                            <Gif/>
+                            <h2>No hay resultados para:"{this.props.history.location.state.query}"</h2>
+                        </div>
                     )}
                 </section>
             </div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Pelicula from "../Pelicula/Pelicula";
-
+import "./style.css";
 
 class Favoritos extends Component {
     constructor(props) {
@@ -17,12 +17,14 @@ class Favoritos extends Component {
                 arrParseado.map(id =>
                 fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=9458a99baf5a9ba3fe341cd43217ef95`)
                     .then((resp) => resp.json())
-                    .then((data) => {
-                        this.setState({
-                            favs: data
-                        })
-                    })
-                    .catch((err) => console.log(err))))
+                    ))
+                    
+            .then((data) => {
+                this.setState({
+                    favs: data
+                })
+            })
+            .catch((err) => console.log(err))
            
                 
         }
@@ -31,16 +33,16 @@ class Favoritos extends Component {
 
 
     render() {
-        const { favs } = this.state;
-
         return (
             <>
                 <h1>Favoritos:</h1>
-                <div>
+                <div className='card-container'>
 
-                    {favs.length === 0 ? (<p>No tienes peliculas favoritas</p>)
+                    {this.state.favs.length === 0 ? (
+                    <p> No tienes peliculas favoritas</p>)
                         :
-                        (favs.map((elm, idx) => (<Pelicula key={idx} elm={elm} />)))}</div>
+                        (this.state.favs.map((elm, idx) => (<Pelicula key={idx} elm={elm} />)))}
+                </div>
 
             </>
 

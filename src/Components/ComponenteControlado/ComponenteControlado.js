@@ -26,7 +26,7 @@ class ComponenteControlado extends Component{
     render(){
         return(
             <div >
-                <form  onSubmit={(event) => this.evitarSubmit(event)} >
+                <form  className="formulariocaja" onSubmit={(event) => this.evitarSubmit(event)} >
                     <input className="form"
                         onChange={(event)=> this.controlarInputs(event)} 
                         value={this.state.valorInput1}

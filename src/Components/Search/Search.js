@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";  // Importar withRouter
 
 class Search extends Component {
     constructor(props) {
@@ -17,30 +16,30 @@ class Search extends Component {
         });
     }
 
-    formSubmit(event) {
-        event.preventDefault();
+    evitarSubmit(event){
+        event.preventDefault()
+        this.props.history.push("/resultados", { query: this.state.query });
+    }
 
-            this.props.history.push("/resultados", { query: this.state.query });
-        }
+   
     
 
     render() {
         return (
             <div>
-                <form onSubmit={this.formSubmit()}>
+                <form onSubmit={(e)=>this.evitarSubmit(e)} className="formulariocaja">
                     <input
                         className="form"
-                        onChange={this.formChange()}
+                        onChange={(e)=> this.formChange(e)}
                         value={this.state.query}
-                        name="query"
                         placeholder="Buscar película"
                     />
-                    <button className="enviar" onClick={() => this.formSubmit()}>Buscar</button>
+                    <button className="enviar">Enviar</button>
                 </form>
             </div>
         );
     }
 }
 
-export default withRouter(Search);  // Exportar envuelto en withRouter
+export default Search;  
 

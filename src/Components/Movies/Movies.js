@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import ComponenteControlado from '../ComponenteControlado/ComponenteControlado'
-//import {Link} from 'react-router-dom'
 import Pelicula from '../Pelicula/Pelicula'
 import "./style.css";
-// import Search from '../Search/Search';
-import Gif from '../Gif/Gif';
-
+import Gif from "../Gif/Gif";
 
 class Movies extends Component {
     constructor(props){
@@ -19,16 +16,7 @@ class Movies extends Component {
         
 
     }
-    filtrarPeliculas(nombrePelicula){
-        const peliculasFiltradas = this.state.peliculasBackup.filter(
-            (elm) => elm.title.toLowerCase().includes(nombrePelicula.toLowerCase()) 
-        )
-
-        this.setState({
-            peliculas: peliculasFiltradas
-        })
-        
-    }
+    
 
     componentDidMount(){
         fetch(this.props.endpoint)
@@ -45,20 +33,32 @@ class Movies extends Component {
         .catch((err) => console.log(err))
 
     }
+    
+    filtrarPeliculas(nombrePelicula){
+        const peliculasFiltradas = this.state.peliculasBackup.filter(
+            (elm) => elm.title.toLowerCase().includes(nombrePelicula.toLowerCase()) 
+        )
+
+        this.setState({
+            peliculas: peliculasFiltradas
+        })
+        
+    }
 
     cargarMas() {
-        fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=9458a99baf5a9ba3fe341cd43217ef95&page=${this.state.paginaACargar}`)
+        fetch(`${this.props.endpoint}&page=${this.state.paginaACargar}`)
         .then((resp) => resp.json())
         .then((data) => 
-            this.setState({peliculas: this.state.peliculas.concat(data.results), peliculasBackup: this.state.concat(data.results),paginaACargar: this.state.paginaACargar + 1 })) 
+            this.setState({
+                peliculas: this.state.peliculas.concat(data.results), 
+                pelisMostradas: this.state.pelisMostradas + this.props.limit,
+                paginaACargar: this.state.paginaACargar + 1 })) 
+
         .catch((err) => console.log(err))
-      
-       ;
     }
 
 
 
-    
 
     render(){
         return (
@@ -68,9 +68,6 @@ class Movies extends Component {
                  {this.props.mostrarComponenteControlado && (
                     <ComponenteControlado  filtrarPeliculas={ (nombre) => this.filtrarPeliculas(nombre) } />
                 )}
-                {/* // (
-                //     <Search history={this.props.history}/>
-                // )} */}
 
                 <section className='card-container'>
                 {this.state.peliculas.length === 0 ?

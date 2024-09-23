@@ -11,27 +11,29 @@ class Pelicula extends Component {
             fav: this.esFav(props.elm.id),
         }
     }
+
     cambiarVerDesc(){
         if (this.state.VerDesc === false) {
         this.setState({
           VerDesc: !this.state.VerDesc,
         })
-    }else{
-        this.setState({
-            VerDesc: !this.state.VerDesc,
-    })
-        }
+        }else{
+            this.setState({
+                VerDesc: !this.state.VerDesc,
+        })
+            }
     }
+
     esFav(id) {
         const storage = localStorage.getItem("categoriaFavs");
         return storage ? JSON.parse(storage).includes(id) : false;
     }
+
     agregarAStorage(id){
        let storage = localStorage.getItem("categoriaFavs")
-       let favs = []; // favs como un array vacío
-
+       let favs = []; 
        if (storage !==null) {
-           favs = JSON.parse(storage); // Solo parsea si hay algo en storage
+           favs = JSON.parse(storage); 
        }
         if (!favs.includes(id)) {
             favs.push(id);
@@ -41,14 +43,15 @@ class Pelicula extends Component {
         }
 
       }
-      quitarStorage(){
-        let storage = localStorage.getItem("categoriaFavs")
-        if (storage) {
-            let favs = JSON.parse(storage);
-            const updatedFavs = favs.filter(favId => favId !== this.props.elm.id);
-            localStorage.setItem("categoriaFavs", JSON.stringify(updatedFavs));
-            this.setState({ fav: false });
-        }}
+
+    quitarStorage(){
+    let storage = localStorage.getItem("categoriaFavs")
+    if (storage) {
+        let favs = JSON.parse(storage);
+        const updatedFavs = favs.filter(favId => favId !== this.props.elm.id);
+        localStorage.setItem("categoriaFavs", JSON.stringify(updatedFavs));
+        this.setState({ fav: false });
+    }}
 
 
     botonFav() {
