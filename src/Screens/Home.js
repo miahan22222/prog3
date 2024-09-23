@@ -8,7 +8,7 @@ function Home() {
     return (
         <React.Fragment>
             <h1> Bienvenidos a M&M  </h1>
-          {/* <Search/> */}
+          {/* <Search/>  */}
            <h2 >Peliculas populares: </h2>
            <Movies endpoint="https://api.themoviedb.org/3/movie/popular?api_key=9458a99baf5a9ba3fe341cd43217ef95" url="populares" limit={5} mostrarComponenteControlado={false} cargarMas={false}/>
            <h2> Peliculas en cartel: </h2>
