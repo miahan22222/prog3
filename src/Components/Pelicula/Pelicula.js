@@ -8,7 +8,7 @@ class Pelicula extends Component {
         super(props)
         this.state = {
             VerDesc: false,
-            fav: this.esFav(props.elm.id),
+            fav: false
         }
     }
 
@@ -24,23 +24,26 @@ class Pelicula extends Component {
             }
     }
 
-    esFav(id) {
+    componentDidMount() {
         const storage = localStorage.getItem("categoriaFavs");
-        return storage ? JSON.parse(storage).includes(id) : false;
+        if (storage !==null) {
+            const favs = JSON.parse(storage); 
+            const esFavorito = favs.includes(this.props.elm.id)
+            if(esFavorito){
+            this.setState({ fav: true })
+        }
+        }
     }
 
-    agregarAStorage(id){
+    agregarAStorage(){
        let storage = localStorage.getItem("categoriaFavs")
-       let favs = []; 
        if (storage !==null) {
-           favs = JSON.parse(storage); 
-       }
-        if (!favs.includes(id)) {
-            favs.push(id);
+            let favs = JSON.parse(storage); 
+            favs.push(this.props.elm.id)
             let storageStringificado = JSON.stringify(favs)
             localStorage.setItem("categoriaFavs", storageStringificado);
             this.setState({ fav: true });
-        }
+       }
 
       }
 
@@ -54,39 +57,32 @@ class Pelicula extends Component {
     }}
 
 
-    botonFav() {
-        const { elm } = this.props;
-        if (this.state.fav) {
-            this.quitarStorage();
-        } else {
-            this.agregarAStorage(elm.id);
-        }
-    }
  
     render () {
         const { elm } = this.props;
         console.log(this.props.elm)  ;
-    return (
-        <div className="card1">                
-            <img className="imagen" src={`https://image.tmdb.org/t/p/w342${elm.poster_path}`} alt=""/>
-            <h1>{elm.title} </h1>
-            <br></br>
-            <section className="info"> 
-            <Link to={`/detalle/${this.props.elm.id}`} className="detalle"> Dirigir al detalle  </Link>
-                {
-                    this.state.VerDesc ?
-                    <p>  {elm.overview}</p>
-                    : null
-                }
-                <button className="enviar" onClick={() => this.cambiarVerDesc()} > {this.state.VerDesc ? "Ocultar Descripcion" : "Ver Descripcion"} </button>
-                <button className="enviar" onClick={() => this.botonFav()}> {this.state.fav ? "Sacar de favs" : "Agregar a favs"}
-                    </button>
 
-            </section>          
-                 
+        return (
+            <div className="card1">                
+                <img className="imagen" src={`https://image.tmdb.org/t/p/w342${elm.poster_path}`} alt=""/>
+                <h1>{elm.title} </h1>
+                <br></br>
+                <section className="info"> 
+                <Link to={`/detalle/${this.props.elm.id}`} className="detalle"> Dirigir al detalle  </Link>
+                    {
+                        this.state.VerDesc ?
+                        <p>  {elm.overview}</p>
+                        : null
+                    }
+                    <button className="enviar" onClick={() => this.cambiarVerDesc()} > {this.state.VerDesc ? "Ocultar Descripcion" : "Ver Descripcion"} </button>
+                    <button className="enviar" onClick={() => !this.state.fav ? this.agregarAStorage() : this.quitarStorage()}> {this.state.fav ? "Sacar de favoritos" : "Agregar a favoritos"}
+                        </button>
+
+                </section>          
                     
+                        
 
-        </div>
+            </div>
     ) }
 } 
 
