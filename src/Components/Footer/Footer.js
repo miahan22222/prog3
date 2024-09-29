@@ -1,10 +1,10 @@
 import React from "react";
 import "./style.css"
-function Footer (){
+function Footer() {
     return (
         <footer>
-        <p> Mia Gorenstein & Mia Hanono</p>
-    </footer>
+            <p> Mia Gorenstein & Mia Hanono</p>
+        </footer>
     )
 }
 

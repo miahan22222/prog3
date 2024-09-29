@@ -1,21 +1,21 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import "./style.css";
 
-class ComponenteControlado extends Component{
-    constructor(props){
+class ComponenteControlado extends Component {
+    constructor(props) {
         super(props)
         this.state = {
             valorInput1: ''
         }
     }
 
-    evitarSubmit(event){
+    evitarSubmit(event) {
         console.log(event)
         event.preventDefault()
     }
 
-   
-    controlarInputs(event){
+
+    controlarInputs(event) {
         this.setState({
             valorInput1: event.target.value
         }, () => this.props.filtrarPeliculas(this.state.valorInput1)
@@ -23,15 +23,15 @@ class ComponenteControlado extends Component{
 
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div >
-                <form  className="formulariocaja" onSubmit={(event) => this.evitarSubmit(event)} >
+                <form className="formulariocaja" onSubmit={(event) => this.evitarSubmit(event)} >
                     <input className="form"
-                        onChange={(event)=> this.controlarInputs(event)} 
+                        onChange={(event) => this.controlarInputs(event)}
                         value={this.state.valorInput1}
                         placeholder='Filtrar peliculas'
-                        
+
                     />
                     <button className="enviar" type='submit'>Enviar</button>
                 </form>

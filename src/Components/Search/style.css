@@ -1,25 +1,25 @@
-.form{
+.form {
     border-radius: 20px;
     height: 50px;
     margin: 20px;
     padding: 20px;
     width: 1000px;
-    
+
 }
 
-.formulariocaja{
+.formulariocaja {
     display: flex;
     justify-content: center;
 }
 
-.enviar{
+.enviar {
     border-radius: 20px;
     height: 50px;
     margin: 20px;
     padding: 20px;
-   
+
 }
 
-.enviar:hover{
-    background-color:cadetblue;
+.enviar:hover {
+    background-color: cadetblue;
 }

@@ -15,10 +15,10 @@ class Resultados extends Component {
         console.log('props results', this.props)
         const loquebusca = this.props.history.location.state.query
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=9458a99baf5a9ba3fe341cd43217ef95&query=${loquebusca}`)
-        .then((resp) => resp.json())
+            .then((resp) => resp.json())
             .then((data) => {
                 console.log("data", data)
-                setTimeout(() => this.setState({ 
+                setTimeout(() => this.setState({
                     resultados: data.results
                 }), 3000);
             })
@@ -30,18 +30,18 @@ class Resultados extends Component {
             <div>
                 <h1>Resultados de búsqueda de:"{this.props.history.location.state.query}"</h1>
                 <section className='card-container'>
-                    {this.state.resultados.length > 0 ?  
-                    
-                    this.state.resultados.map((elm) => (
-                                <Pelicula elm={elm} url={this.props.url} />
-                            ))
-                    :
-                    (
-                        <div>
-                            <Gif/>
-                            <h2>No hay resultados para:"{this.props.history.location.state.query}"</h2>
-                        </div>
-                    )}
+                    {this.state.resultados.length > 0 ?
+
+                        this.state.resultados.map((elm) => (
+                            <Pelicula elm={elm} url={this.props.url} />
+                        ))
+                        :
+                        (
+                            <div>
+                                <Gif />
+                                <h2>No hay resultados para:"{this.props.history.location.state.query}"</h2>
+                            </div>
+                        )}
                 </section>
             </div>
         );

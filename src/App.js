@@ -15,19 +15,19 @@ function App() {
     <>
 
 
-    <Navbar />
+      <Navbar />
       <div className="App">
 
         <Switch>
           <Route path='/' exact={true} component={Home} />
           <Route path='/favoritos' component={Favoritoss} />
-          <Route path='/populares'  exact={true} component={Populares}/>
+          <Route path='/populares' exact={true} component={Populares} />
           <Route path="/detalle/:id" component={Detalle} />
-          <Route path='/cartel'  exact={true} component={Cartel}/>
+          <Route path='/cartel' exact={true} component={Cartel} />
           <Route path='/resultados' exact={true} component={ResultadosBusqueda} />
           <Route path="" component={NotFound} />
         </Switch>
-        <Footer/>
+        <Footer />
       </div>
     </>
   );

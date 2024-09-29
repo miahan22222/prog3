@@ -8,7 +8,7 @@ class Search extends Component {
         };
     }
 
-  
+
 
     formChange(event) {
         this.setState({
@@ -16,21 +16,21 @@ class Search extends Component {
         });
     }
 
-    evitarSubmit(event){
+    evitarSubmit(event) {
         event.preventDefault()
         this.props.history.push("/resultados", { query: this.state.query });
     }
 
-   
-    
+
+
 
     render() {
         return (
             <div>
-                <form onSubmit={(e)=>this.evitarSubmit(e)} className="formulariocaja">
+                <form onSubmit={(e) => this.evitarSubmit(e)} className="formulariocaja">
                     <input
                         className="form"
-                        onChange={(e)=> this.formChange(e)}
+                        onChange={(e) => this.formChange(e)}
                         value={this.state.query}
                         placeholder="Buscar película"
                     />
@@ -41,5 +41,5 @@ class Search extends Component {
     }
 }
 
-export default Search;  
+export default Search;
 

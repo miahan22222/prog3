@@ -1,5 +1,5 @@
 /* Navigation */
-nav{
+nav {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -35,7 +35,8 @@ nav ul {
     margin-left: 10px;
 }
 
-h1,h2 {
+h1,
+h2 {
     font-weight: 400;
 }
 
@@ -50,7 +51,8 @@ main {
         flex-direction: column;
 
     }
-    nav{
+
+    nav {
         flex-direction: column;
     }
 }

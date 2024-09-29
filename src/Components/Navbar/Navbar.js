@@ -26,7 +26,7 @@ function Navbar() {
 
     return (
         <nav>
-             <ul className="logo">
+            <ul className="logo">
                 <li> <img src="./img/logo.jpg" alt="" /> </li>
             </ul>
             <ul className="main-nav">
@@ -35,7 +35,7 @@ function Navbar() {
                 }
 
             </ul>
-           
+
         </nav>
     )
 };

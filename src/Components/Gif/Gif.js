@@ -34,7 +34,7 @@ class Gif extends Component {
         return (
             <div>
                 {contenido}
-               
+
             </div>
         );
     }
